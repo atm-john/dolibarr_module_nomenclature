@@ -300,9 +300,15 @@ function _show_product_nomenclature(&$PDOdb, &$product, &$object) {
 	$idion = 0;
 	foreach($TNomenclature as $iN => &$n) {
 	    
-	    $fk_nomenclature=(int)GETPOST('fk_nomenclature');
+	    // default open
+	    if(!empty($n->is_default)){
+	        $accordeonActiveIndex = $idion; 
+	    }
 	    
+	    // open if edited
+	    $fk_nomenclature=(int)GETPOST('fk_nomenclature');
 	    if(!empty($fk_nomenclature) && $fk_nomenclature == $n->id){ $accordeonActiveIndex = $idion; }
+	    
 	    $idion++;
 	    
 		// On passe par là depuis l'onglet "Ouvrage" d'un produit, du coup il faut passer la qty_reference de la nomenclature
